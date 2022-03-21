@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XDebuggerHelper", "XDebuggerHelper.csproj", "{1E814CE2-69AB-4CDB-BA1C-26FFF230C7CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E814CE2-69AB-4CDB-BA1C-26FFF230C7CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E814CE2-69AB-4CDB-BA1C-26FFF230C7CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E814CE2-69AB-4CDB-BA1C-26FFF230C7CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E814CE2-69AB-4CDB-BA1C-26FFF230C7CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E4F26630-99B9-423F-872E-D32535743CE6}
+	EndGlobalSection
+EndGlobal

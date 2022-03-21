@@ -1,0 +1,6 @@
+displayName = XDebuggerHelper
+author = Xx xXXxX
+version = 0.1
+
+modReferences = XxDefinitions
+sortAfter = XxDefinitions
