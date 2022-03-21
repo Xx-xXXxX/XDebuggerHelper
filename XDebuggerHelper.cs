@@ -17,16 +17,16 @@ namespace XDebuggerHelper
 		public override void Load()
 		{
 			ModTranslation Translations = this.CreateTranslation("tryGetXDebugger_XDebuggerMode_0");
-			Translations.SetDefault("UnLoad");
+			Translations.SetDefault("Inexist");
 			Translations.AddTranslation(GameCulture.Chinese, "不存在");
 			this.AddTranslation(Translations);
 			Translations = this.CreateTranslation("tryGetXDebugger_XDebuggerMode_1");
-			Translations.SetDefault("Off");
-			Translations.AddTranslation(GameCulture.Chinese, "禁用");
+			Translations.SetDefault("Disabled");
+			Translations.AddTranslation(GameCulture.Chinese, "已禁用");
 			this.AddTranslation(Translations);
 			Translations = this.CreateTranslation("tryGetXDebugger_XDebuggerMode_2");
-			Translations.SetDefault("On");
-			Translations.AddTranslation(GameCulture.Chinese, "启用");
+			Translations.SetDefault("Enabled");
+			Translations.AddTranslation(GameCulture.Chinese, "已启用");
 			this.AddTranslation(Translations);
 
 			uI1 = new UI.XDebuggerHelperUI1();
