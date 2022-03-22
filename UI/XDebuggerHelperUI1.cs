@@ -39,70 +39,125 @@ namespace XDebuggerHelper.UI
 	}
 	public class XDebuggerHelperUI1:UIState
 	{
+		public List<TryGetXDebugger> AnnouncedDebuggers => XDebugger.AnnouncedDebuggers.Value;
 		public static bool Using=false;
-		private UIPanel area;
-		private UIPanel area2;
-		private UIPanel area3;
-		public UINamedSwitch XDebuggerSwitch;
-		public UIScrollbar uIScrollbar;
+		private UIPanel _area;
+		//private UIPanel Aarea;
+		private UIPanel Aarea2;
+		//private UIPanel Aarea3;
+		public UIRightNamedSwitch AXDebuggerSwitch;
+		public UIScrollbar AuIScrollbar;
 		public UIDrag uIDrag;
+		public UIList AItems;
+		private UIPanel Barea;
+		public UIList BItems;
+		public UIScrollbar BuIScrollbar;
+		public int W1 = 350;
+		public int W2 = 250;
+		public int H1 = 32;
+		public int H2=250;
 		public override void OnInitialize()
 		{
-			area = new UIPanel();
-			area.Left.Set(-area.Width.Pixels - 600, 1f); // Place the resource bar to the left of the hearts.
-			area.Top.Set(30, 0f); // Placing it just a bit below the top of the screen.
-			area.Width.Set(250, 0f); // We will be placing the following 2 UIElements within this 182x60 area.
-			area.Height.Set(250, 0f);
-			area.BackgroundColor= new Color(73, 94, 171);
-			Append(area);
+			_area = new UIPanel();
+			_area.Width.Set(W1+W2, 0f); // We will be placing the following 2 UIElements within this 182x60 area.
+			_area.Left.Set(-_area.Width.Pixels - 600, 1f); // Place the resource bar to the left of the hearts.
+			_area.Top.Set(30, 0f); // Placing it just a bit below the top of the screen.
+			_area.Height.Set(H2, 0f);
+			_area.BackgroundColor = new Color(73, 94, 171);
+			Append(_area);
 
-			area3 = new UIPanel();
-			area3.Left.Set(0, 0f); // Place the resource bar to the left of the hearts.
-			area3.Top.Set(0, 0f); // Placing it just a bit below the top of the screen.
-			area3.Width.Set(-area3.Left.Pixels, 1f); // We will be placing the following 2 UIElements within this 182x60 area.
-			area3.Height.Set(40, 0f);
-			area3.BackgroundColor = new Color(73, 94, 171);
-			area.Append(area3);
+			uIDrag = new UIDrag();
+			_area.Append(uIDrag);
+			//uIDrag.LeftMouse = false;
+			//uIDrag.RightMouse = true;
+			//uIDrag.ThroughAll = true;
+			uIDrag.Active = true;
 
-			XDebuggerSwitch = new UINamedSwitch("XDebuggerMode",new RefByDelegate<bool>(()=>XDebugger.DebugMode,(value)=> {
+			//Aarea = new UIPanel();
+			//Aarea.Top.Set(0, 0f); // Placing it just a bit below the top of the screen.
+			//Aarea.Width.Set(W1, 0f); // We will be placing the following 2 UIElements within this 182x60 area.
+			//Aarea.Height.Set(0, 1f);
+			//Aarea.Left.Set(0, 0f); // Place the resource bar to the left of the hearts.
+			//Aarea.BackgroundColor= new Color(73, 94, 171);
+			//_area.Append(Aarea);
+
+			//Aarea3 = new UIPanel();
+			//Aarea3.Left.Set(0, 0f); // Place the resource bar to the left of the hearts.
+			//Aarea3.Top.Set(0, 0f); // Placing it just a bit below the top of the screen.
+			//Aarea3.Width.Set(-Aarea3.Left.Pixels, 1f); // We will be placing the following 2 UIElements within this 182x60 area.
+			//Aarea3.Height.Set(40, 0f);
+			//Aarea3.BackgroundColor = new Color(73, 94, 171);
+			//Aarea.Append(Aarea3);
+
+			AXDebuggerSwitch = new UIRightNamedSwitch("XDebuggerMode",new RefByDelegate<bool>(()=>XDebugger.DebugMode,(value)=> {
 				if (value) XDebugger.DebugMode = true;
 				else XDebugger.CloseDebugMode();
 			}),null);
-			XDebuggerSwitch.Top.Set(1, 0f);
-			XDebuggerSwitch.Left.Set(1, 0f);
-			XDebuggerSwitch.Width.Set(-XDebuggerSwitch.Left.Pixels-16, 1f);
-			XDebuggerSwitch.Height.Set(32, 0f);
-			area3.Append(XDebuggerSwitch);
+			//AXDebuggerSwitch.Top.Set(1, 0f);
+			//AXDebuggerSwitch.Left.Set(1, 0f);
+			//AXDebuggerSwitch.Width.Set(-AXDebuggerSwitch.Left.Pixels-16, 1f);
+			//AXDebuggerSwitch.Height.Set(32, 0f);
+			_area.Append(AXDebuggerSwitch);
 
-			area2 = new UIPanel();
-			area2.Left.Set(0, 0f); // Place the resource bar to the left of the hearts.
-			area2.Top.Set(40, 0f); // Placing it just a bit below the top of the screen.
-			area2.Width.Set(-area2.Left.Pixels, 1f); // We will be placing the following 2 UIElements within this 182x60 area.
-			area2.Height.Set(-area2.Top.Pixels, 1f);
-			area2.BackgroundColor = new Color(73, 94, 171);
-			area.Append(area2);
+			Aarea2 = new UIPanel();
+			Aarea2.Left.Set(0, 0f); // Place the resource bar to the left of the hearts.
+			Aarea2.Top.Set(H1, 0f); // Placing it just a bit below the top of the screen.
+			Aarea2.Width.Set(W1, 0f); // We will be placing the following 2 UIElements within this 182x60 area.
+			Aarea2.Height.Set(-Aarea2.Top.Pixels, 1f);
+			Aarea2.BackgroundColor = new Color(73, 94, 171);
+			_area.Append(Aarea2);
 
-			Items = new UIList();
-			Items.Top.Set(1, 0f);
-			Items.Left.Set(1, 0f);
-			Items.Width.Set(-Items.Left.Pixels-16, 1f);
-			Items.Height.Set(-Items.Top.Pixels, 1f);
-			Items.ListPadding = 5f;
-			area2.Append(Items);
+			AItems = new UIList();
+			AItems.Top.Set(0, 0f);
+			AItems.Left.Set(0, 0f);
+			AItems.Width.Set(-16, 1f);
+			AItems.Height.Set(0, 1f);
+			AItems.ListPadding = 5f;
+			Aarea2.Append(AItems);
 
-			uIScrollbar = new UIScrollbar();
-			uIScrollbar.SetView(100f, 1000f);
-			uIScrollbar.Height.Set(0, 1f);
-			uIScrollbar.HAlign = 1f;
-			area2.Append(uIScrollbar);
-			Items.SetScrollbar(uIScrollbar);
+			AuIScrollbar = new UIScrollbar();
+			AuIScrollbar.SetView(100f, 1000f);
+			AuIScrollbar.Height.Set(0, 1f);
+			AuIScrollbar.HAlign = 1f;
+			Aarea2.Append(AuIScrollbar);
+			AItems.SetScrollbar(AuIScrollbar);
 
-			uIDrag = new UIDrag();
-			area.Append(uIDrag);
-			uIDrag.LeftMouse = false;
-			uIDrag.RightMouse = true;
-			uIDrag.ThroughAll = true;
-			uIDrag.Active = true;
+			Barea = new UIPanel();
+			Barea.Top.Set(0, 0f); 
+			Barea.Height.Set(0, 1f);
+			Barea.Left.Set(W1, 0f); // Place the resource bar to the left of the hearts.
+			Barea.Width.Set(-Barea.Left.Pixels, 1f); // We will be placing the following 2 UIElements within this 182x60 area.
+			Barea.BackgroundColor = new Color(73, 94, 171);
+			_area.Append(Barea);
+
+			BItems = new UIList();
+			BItems.Top.Set(0, 0f);
+			BItems.Left.Set(0, 0f);
+			BItems.Width.Set( - 16, 1f);
+			BItems.Height.Set(0, 1f);
+			BItems.ListPadding = 5f;
+			Barea.Append(BItems);
+
+			BuIScrollbar = new UIScrollbar();
+			BuIScrollbar.SetView(100f, 1000f);
+			BuIScrollbar.Height.Set(0, 1f);
+			BuIScrollbar.HAlign = 1f;
+			Barea.Append(BuIScrollbar);
+			BItems.SetScrollbar(BuIScrollbar);
+
+			UIRightNamedSwitch SwitchUI;
+			IGetSetValue<bool> SwitchV = new RefByDelegate<bool>(() => ShowNPCDebugInfo.ShowAlways, (v) => ShowNPCDebugInfo.ShowAlways = v);
+			SwitchUI = new UIRightNamedSwitch(
+						"ShowNPCDebugInfo",
+						SwitchV,
+						new XxDefinitions.AbleString(SwitchV)
+					);
+
+			//SwitchUI.Top.Set(1, 0f);
+			//SwitchUI.Left.Set(1, 0f);
+			//SwitchUI.Width.Set(-SwitchUI.Left.Pixels - 16, 1f);
+			//SwitchUI.Height.Set(32, 0f);
+			BItems.Add(SwitchUI	);
 		}
 		public bool XDebuggerUsing {
 			get => XDebugger.DebugMode;
@@ -111,27 +166,44 @@ namespace XDebuggerHelper.UI
 				else XDebugger.DebugMode = true;
 			}
 		}
-		public List<TryGetXDebugger> AnnouncedDebuggers => XDebugger.AnnouncedDebuggers.Value;
-		public UIList Items;
 		public override void Update(GameTime gameTime)
 		{
 			//XDebuggerHelper.L1.Value.Debug(Items._items.Count);
-			if (Items == null&& area!=null) {
-			}
-			if (AnnouncedDebuggers .Count!=Items._items.Count) {
-				Items.Clear();
+			//XDebuggerHelper.L1.Value.Debug($"AnnouncedDebuggers: {AnnouncedDebuggers.Count},AItems:{AItems._items.Count}");
+			if (AnnouncedDebuggers.Count!=AItems._items.Count) {
+				AItems.Clear();
+				UIRightNamedSwitch SwitchUI;
 				foreach (var i in AnnouncedDebuggers) {
-					ShowXDebugger showXDebugger = new ShowXDebugger(i);
-					showXDebugger.Activate();
-					Items.Add(showXDebugger);
-				}
-				
-				Items.SetScrollbar(uIScrollbar);
-				Items.Recalculate();
+					//ShowXDebugger showXDebugger = new ShowXDebugger(i);
+					//AItems.Add(showXDebugger);
 
+					SwitchUI = new UIRightNamedSwitch
+							(
+							   i.FullName,
+							new RefByDelegate<bool>
+								(
+								 () => i.XDebuggerMode == 2,
+								 (value) => { if (i.XDebuggerMode != 0) i.xDebugger.Using = value; }
+								),
+						new GetByDelegate<string>
+								(
+							() => Language.GetTextValue($"Mods.XDebuggerHelper.tryGetXDebugger_XDebuggerMode_{i.XDebuggerMode}")
+								)
+							);
+					AItems.Add
+						(
+						SwitchUI
+						);
+					//SwitchUI.Initialize();
+				}
+				AItems.SetScrollbar(AuIScrollbar);
+				AItems.Recalculate();
+				AItems.Activate();
 			}
+			
 			base.Update(gameTime);
 		}
+		
 	}
 	public class ShowXDebugger : UIElement {
 		public UISwitch Switch;
