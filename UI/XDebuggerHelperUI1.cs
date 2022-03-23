@@ -42,9 +42,7 @@ namespace XDebuggerHelper.UI
 		public List<TryGetXDebugger> AnnouncedDebuggers => XDebugger.AnnouncedDebuggers.Value;
 		public static bool Using=false;
 		private UIPanel _area;
-		//private UIPanel Aarea;
 		private UIPanel Aarea2;
-		//private UIPanel Aarea3;
 		public UIRightNamedSwitch AXDebuggerSwitch;
 		public UIScrollbar AuIScrollbar;
 		public UIDrag uIDrag;
@@ -68,35 +66,12 @@ namespace XDebuggerHelper.UI
 
 			uIDrag = new UIDrag();
 			_area.Append(uIDrag);
-			//uIDrag.LeftMouse = false;
-			//uIDrag.RightMouse = true;
-			//uIDrag.ThroughAll = true;
 			uIDrag.Active = true;
-
-			//Aarea = new UIPanel();
-			//Aarea.Top.Set(0, 0f); // Placing it just a bit below the top of the screen.
-			//Aarea.Width.Set(W1, 0f); // We will be placing the following 2 UIElements within this 182x60 area.
-			//Aarea.Height.Set(0, 1f);
-			//Aarea.Left.Set(0, 0f); // Place the resource bar to the left of the hearts.
-			//Aarea.BackgroundColor= new Color(73, 94, 171);
-			//_area.Append(Aarea);
-
-			//Aarea3 = new UIPanel();
-			//Aarea3.Left.Set(0, 0f); // Place the resource bar to the left of the hearts.
-			//Aarea3.Top.Set(0, 0f); // Placing it just a bit below the top of the screen.
-			//Aarea3.Width.Set(-Aarea3.Left.Pixels, 1f); // We will be placing the following 2 UIElements within this 182x60 area.
-			//Aarea3.Height.Set(40, 0f);
-			//Aarea3.BackgroundColor = new Color(73, 94, 171);
-			//Aarea.Append(Aarea3);
 
 			AXDebuggerSwitch = new UIRightNamedSwitch("XDebuggerMode",new RefByDelegate<bool>(()=>XDebugger.DebugMode,(value)=> {
 				if (value) XDebugger.DebugMode = true;
 				else XDebugger.CloseDebugMode();
 			}),null);
-			//AXDebuggerSwitch.Top.Set(1, 0f);
-			//AXDebuggerSwitch.Left.Set(1, 0f);
-			//AXDebuggerSwitch.Width.Set(-AXDebuggerSwitch.Left.Pixels-16, 1f);
-			//AXDebuggerSwitch.Height.Set(32, 0f);
 			_area.Append(AXDebuggerSwitch);
 
 			Aarea2 = new UIPanel();
@@ -152,12 +127,15 @@ namespace XDebuggerHelper.UI
 						SwitchV,
 						new XxDefinitions.AbleString(SwitchV)
 					);
-
-			//SwitchUI.Top.Set(1, 0f);
-			//SwitchUI.Left.Set(1, 0f);
-			//SwitchUI.Width.Set(-SwitchUI.Left.Pixels - 16, 1f);
-			//SwitchUI.Height.Set(32, 0f);
 			BItems.Add(SwitchUI	);
+			SwitchV= new RefByDelegate<bool>(() => ShowProjDebugInfo.ShowAlways, (v) => ShowProjDebugInfo.ShowAlways = v);
+			SwitchUI = new UIRightNamedSwitch(
+						"ShowProjDebugInfo",
+						SwitchV,
+						new XxDefinitions.AbleString(SwitchV)
+					);
+			BItems.Add(SwitchUI);
+
 		}
 		public bool XDebuggerUsing {
 			get => XDebugger.DebugMode;
@@ -279,4 +257,6 @@ namespace XDebuggerHelper.UI
 			}
 		}
 	}
+
+	
 }
